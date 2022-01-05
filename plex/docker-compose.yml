@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  plex:
+    image: plexinc/pms-docker
+    restart: unless-stopped
+    environment:
+      TZ: "Europe/Moscow"
+    network_mode: "host"
+    volumes:
+      - $HOME/.local/share/plex/config:/config
+      - $HOME/.local/share/plex/transcode:/transcode
+      - $HOME/storage:/data:ro

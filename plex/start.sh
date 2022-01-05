@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+PLEX_DIR="$HOME/.local/share/plex"
+
 
 build_image() {
     local repo_dir="$(pwd)/plex-repo"
@@ -30,5 +32,11 @@ build_image() {
 }
 
 
+docker-compose stop
+
 build_image
+
+mkdir -p "$PLEX_DIR/"{config,transcode}
+
+docker-compose up -d
 
