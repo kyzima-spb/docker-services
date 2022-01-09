@@ -1,0 +1,57 @@
+version: "3.8"
+
+secrets:
+  source_password:
+    file: ./secrets/source_password
+  relay_password:
+    file: ./secrets/relay_password
+  admin_password:
+    file: ./secrets/admin_password
+
+services:
+  avril:
+    image: kyzimaspb/ezstream
+    depends_on:
+      - icecast
+    secrets:
+      - source_password
+    environment:
+      EZ_SERVER_HOSTNAME: icecast
+      EZ_SERVER_PASSWORD_FILE: /run/secrets/source_password
+      EZ_STREAM_MOUNTPOINT: /default
+      EZ_STREAM_FORMAT: MP3
+      EZ_STREAM_NAME: "Avril Lavigne Discography"
+      EZ_STREAM_GENRE: "Pop punk, pop rock, alternative, rockpost-grunge (early)"
+      EZ_STREAM_DESCRIPTION: "Full Avril Lavigne discography"
+      EZ_INTAKE_SHUFFLE: "Yes"
+    volumes:
+      - ./storage:/data/2002:ro
+  avril2:
+    image: kyzimaspb/ezstream
+    depends_on:
+      - icecast
+    secrets:
+      - source_password
+    environment:
+      EZ_SERVER_HOSTNAME: icecast
+      EZ_SERVER_PASSWORD_FILE: /run/secrets/source_password
+      EZ_STREAM_MOUNTPOINT: "/avril-lavigne"
+      EZ_STREAM_FORMAT: MP3
+      EZ_STREAM_NAME: "Avril Lavigne Discography"
+      EZ_STREAM_GENRE: "Pop punk, pop rock, alternative, rockpost-grunge (early)"
+      EZ_STREAM_DESCRIPTION: "Full Avril Lavigne discography"
+      EZ_INTAKE_SHUFFLE: "Yes"
+    volumes:
+      - ./storage:/data/2007:ro
+  icecast:
+    build: ./icecast
+    secrets:
+      - source_password
+      - relay_password
+      - admin_password
+    environment:
+      ICECAST_SOURCE_PASSWORD_FILE: /run/secrets/source_password
+      ICECAST_RELAY_PASSWORD_FILE: /run/secrets/relay_password
+      ICECAST_ADMIN_PASSWORD_FILE: /run/secrets/admin_password
+    ports:
+      - 8000:8000

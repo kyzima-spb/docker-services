@@ -1,0 +1,20 @@
+FROM alpine:3.13
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
+EXPOSE 8000
+VOLUME ["/var/log/icecast"]
+
+RUN set -x \
+    && addgroup -S icecast \
+    && adduser -S -g icecast icecast
+    # && chown icecast:icecast /var/log/icecast
+
+RUN set -x \
+    && apk update \
+    && apk add --no-cache sed gettext icecast mailcap \
+    && rm -rf /var/cache/apk/* \
+    && wget --no-check-certificate -qO /opt/secrets.sh "https://kyzima-spb.github.io/src/docker/secrets.sh"
+
+ADD ./root /
+
+CMD ["icecast", "-c", "/etc/icecast.xml"]
