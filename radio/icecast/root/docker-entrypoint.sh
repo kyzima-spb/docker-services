@@ -29,5 +29,6 @@ fileEnv "ICECAST_ADMIN_PASSWORD"
 checkRequired "$ICECAST_ADMIN_PASSWORD"
 replaceOption "admin-password" "$ICECAST_ADMIN_PASSWORD"
 
+chown -R icecast:icecast /var/log/icecast
 
 exec "$@"
