@@ -25,7 +25,8 @@ services:
       EZ_STREAM_DESCRIPTION: "Full Avril Lavigne discography"
       EZ_INTAKE_SHUFFLE: "Yes"
     volumes:
-      - ./storage:/data/2002:ro
+      - ./storage/2002:/data/2002:ro
+  
   avril2:
     image: kyzimaspb/ezstream
     depends_on:
@@ -42,7 +43,8 @@ services:
       EZ_STREAM_DESCRIPTION: "Full Avril Lavigne discography"
       EZ_INTAKE_SHUFFLE: "Yes"
     volumes:
-      - ./storage:/data/2007:ro
+      - ./storage/2007:/data/2007:ro
+  
   icecast:
     build: ./icecast
     secrets:

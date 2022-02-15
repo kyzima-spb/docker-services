@@ -1,4 +1,5 @@
 FROM alpine:3.13
+LABEL maintainer="Kirill Vercetti <office@kyzima-spb.com>"
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 EXPOSE 8000
@@ -6,8 +7,8 @@ VOLUME ["/var/log/icecast"]
 
 RUN set -x \
     && addgroup -S icecast \
-    && adduser -S -g icecast icecast
-    # && chown icecast:icecast /var/log/icecast
+    && adduser -S -g icecast icecast \
+    && chown icecast:icecast /var/log/icecast
 
 RUN set -x \
     && apk update \
