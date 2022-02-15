@@ -1,4 +1,5 @@
 FROM alpine:3.13
+LABEL maintainer="Kirill Vercetti <office@kyzima-spb.com>"
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
@@ -12,4 +13,4 @@ VOLUME ["/data"]
 
 ADD ./root /
 
-CMD ["ezstream", "-c", "/ezstream/ezstream.xml"]
+CMD ["/usr/bin/ezstream", "-c", "/ezstream/ezstream.xml"]

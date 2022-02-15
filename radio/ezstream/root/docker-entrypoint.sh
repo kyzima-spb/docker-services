@@ -24,7 +24,7 @@ makePlaylist() {
     local playlistPath="/ezstream/playlist.txt"
     
     if [[ ! -z "$playlist" ]]; then
-        echo $playlist > "$playlistPath"
+        echo "$playlist" > "$playlistPath"
         export EZ_INTAKE_FILENAME="$playlistPath"
     fi
 }
