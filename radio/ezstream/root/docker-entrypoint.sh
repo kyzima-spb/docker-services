@@ -3,14 +3,6 @@ set -e
 
 source /opt/secrets.sh
 
-# Initialize values that might be stored in a file
-fileEnv "EZ_SERVER_PASSWORD"
-
-
-if [[ -z $EZ_SERVER_HOSTNAME ]]; then
-    export EZ_SERVER_HOSTNAME="127.0.0.1"
-fi
-
 
 makeConfig() {
     local tmplPath="/ezstream/ezstream.tmpl"
@@ -29,15 +21,16 @@ makePlaylist() {
     fi
 }
 
-clearEnvironment() {
-    for name in $(printenv | grep "EZ_" | cut -d= -f1); do
-        unset "$name"
-    done
-}
 
+# Initialize values that might be stored in a file
+fileEnv "EZ_SERVER_PASSWORD"
+
+if [[ -z $EZ_SERVER_HOSTNAME ]]; then
+    export EZ_SERVER_HOSTNAME="127.0.0.1"
+fi
 
 makePlaylist
 makeConfig
-clearEnvironment
+clearEnvironment "EZ"
 
 exec "$@"

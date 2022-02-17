@@ -52,6 +52,7 @@ services:
       - relay_password
       - admin_password
     environment:
+      ICECAST_ADMIN: office@kyzima-spb.com
       ICECAST_SOURCE_PASSWORD_FILE: /run/secrets/source_password
       ICECAST_RELAY_PASSWORD_FILE: /run/secrets/relay_password
       ICECAST_ADMIN_PASSWORD_FILE: /run/secrets/admin_password

@@ -7,7 +7,7 @@ ROOT_DIR="$(dirname "$(readlink -f "$0")")"
 make_secret()
 {
     if [[ ! -f $1 ]]; then
-        pwgen -y -r "/\\,<>" 32 1 > "$1"
+        pwgen -s 32 1 > "$1"
     fi
 }
 

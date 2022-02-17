@@ -1,9 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <icecast>
     <!-- location and admin are two arbitrary strings that are e.g. visible
          on the server info page of the icecast web interface
          (server_version.xsl). -->
     <location>Earth</location>
-    <admin>office@kyzima-spb.com</admin>
+    <admin>${ICECAST_ADMIN}</admin>
 
     <!-- IMPORTANT!
          Especially for inexperienced users:
@@ -34,13 +36,13 @@
 
     <authentication>
         <!-- Sources log in with username 'source' -->
-        <source-password></source-password>
+        <source-password>${ICECAST_SOURCE_PASSWORD}</source-password>
         <!-- Relays log in with username 'relay' -->
-        <relay-password></relay-password>
+        <relay-password>${ICECAST_RELAY_PASSWORD}</relay-password>
 
         <!-- Admin logs in with the username given below -->
-        <admin-user>admin</admin-user>
-        <admin-password></admin-password>
+        <admin-user>${ICECAST_ADMIN_USER}</admin-user>
+        <admin-password>${ICECAST_ADMIN_PASSWORD}</admin-password>
     </authentication>
 
     <!-- set the mountpoint for a shoutcast source to use, the default if not
