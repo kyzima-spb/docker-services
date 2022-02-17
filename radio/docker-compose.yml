@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.7"
 
 secrets:
   source_password:
@@ -18,16 +18,16 @@ services:
     environment:
       EZ_SERVER_HOSTNAME: icecast
       EZ_SERVER_PASSWORD_FILE: /run/secrets/source_password
-      EZ_STREAM_MOUNTPOINT: /default
+      EZ_STREAM_MOUNTPOINT: /avril-lavigne
       EZ_STREAM_FORMAT: MP3
       EZ_STREAM_NAME: "Avril Lavigne Discography"
       EZ_STREAM_GENRE: "Pop punk, pop rock, alternative, rockpost-grunge (early)"
       EZ_STREAM_DESCRIPTION: "Full Avril Lavigne discography"
       EZ_INTAKE_SHUFFLE: "Yes"
     volumes:
-      - ./storage/2002:/data/2002:ro
+      - $HOME/storage/Music/Avril Lavigne:/data:ro
   
-  avril2:
+  pop:
     image: kyzimaspb/ezstream
     depends_on:
       - icecast
@@ -36,14 +36,14 @@ services:
     environment:
       EZ_SERVER_HOSTNAME: icecast
       EZ_SERVER_PASSWORD_FILE: /run/secrets/source_password
-      EZ_STREAM_MOUNTPOINT: "/avril-lavigne"
+      EZ_STREAM_MOUNTPOINT: /pop
       EZ_STREAM_FORMAT: MP3
-      EZ_STREAM_NAME: "Avril Lavigne Discography"
-      EZ_STREAM_GENRE: "Pop punk, pop rock, alternative, rockpost-grunge (early)"
-      EZ_STREAM_DESCRIPTION: "Full Avril Lavigne discography"
+      EZ_STREAM_NAME: "Pop music"
+      EZ_STREAM_GENRE: "Pop, Dance"
+      EZ_STREAM_DESCRIPTION: ""
       EZ_INTAKE_SHUFFLE: "Yes"
     volumes:
-      - ./storage/2007:/data/2007:ro
+      - $HOME/storage/Music/Pop:/data:ro
   
   icecast:
     build: ./icecast
