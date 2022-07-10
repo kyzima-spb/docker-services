@@ -10,4 +10,3 @@ services:
     volumes:
       - $HOME/.local/share/plex/config:/config
       - $HOME/.local/share/plex/transcode:/transcode
-      - $HOME/storage:/data:ro
